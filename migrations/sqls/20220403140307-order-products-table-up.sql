@@ -2,5 +2,5 @@ CREATE TABLE order_products (
     id SERIAL PRIMARY KEY,
     order_id BIGINT NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
     product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE RESTRICT,
-    quantity INTEGER  NOT NULL
+    quantity INTEGER NOT NULL
 );

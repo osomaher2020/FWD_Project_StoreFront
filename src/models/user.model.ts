@@ -52,4 +52,19 @@ export class User {
     }
 
     // authenticate (signIn)
+    async authenticate(first_name: string, password:string): Promise<UserObj | null> {
+        const conn = await CONN.connect();
+        const sql = "SELECT * FROM users WHERE first_name=($1)";
+        const result = await conn.query(sql, [first_name]);
+        conn.release();
+
+        if(result.rows.length){
+            const db_user = result.rows[0];
+            if(bcrypt.compareSync(password+BCRYPT_SALT, db_user.password)){
+                return db_user;
+            }
+        }
+
+        return null;
+    }
 }
