@@ -4,7 +4,7 @@ export type ProductObj = {
     id?: number;
     name: string;
     price: number;
-    category: string;
+    category?: string;
 };
 
 export class Product {
@@ -37,8 +37,6 @@ export class Product {
 
         return result.rows[0];
     }
-
-    // top 5 most popular products (have the largest sell count)
 
     // category's products
     async category_products(category: string): Promise<ProductObj[]> {
