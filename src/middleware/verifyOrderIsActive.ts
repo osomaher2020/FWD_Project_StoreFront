@@ -1,7 +1,7 @@
 import express from "express";
 import CONN from '../DB_CONN';
 
-const verifyOrderIsActive = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+const verifyOrderIsActive = async (req: express.Request, _res: express.Response, next: express.NextFunction) => {
     try {
         const conn = await CONN.connect();
         const sql = "SELECT * FROM orders WHERE id=($1)";

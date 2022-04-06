@@ -19,7 +19,7 @@ describe("User Model", () => {
         });
 
         expect(result).toEqual({
-            id: 1,
+            id: 2,
             first_name: "osama",
             last_name: "maher"
         });
@@ -30,5 +30,16 @@ describe("User Model", () => {
         const result: (UserObj | null) = await user.authenticate( "osama", "123" );
 
         expect(result).not.toBeNull();
+    });
+
+    // show
+    it("show User returns UserObj", async () => {
+        const result: (UserObj | null) = await user.show(2);
+
+        expect(result).toEqual({
+            id: 2,
+            first_name: "osama",
+            last_name: "maher"
+        });
     });
 });

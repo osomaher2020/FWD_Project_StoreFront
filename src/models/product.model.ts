@@ -47,4 +47,14 @@ export class Product {
 
         return result.rows;
     }
+
+    // for test tearDown
+    async delete(id: number): Promise<boolean> {
+        const conn = await CONN.connect();
+        const sql = "DELETE FROM products WHERE id=($1)";
+        await conn.query(sql, [id]);
+        conn.release();
+
+        return true;
+    }
 }

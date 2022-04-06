@@ -30,7 +30,7 @@ export class User {
     // show
     async show(id: number): Promise<UserObj> {
         const conn = await CONN.connect();
-        const sql = "SELECT * FROM users WHERE id=($1)";
+        const sql = "SELECT id, first_name, last_name FROM users WHERE id=($1)";
         const result = await conn.query(sql, [id]);
         conn.release();
 
@@ -66,5 +66,17 @@ export class User {
         }
 
         return null;
+    }
+
+
+    // for test tearDown
+    async delete(id: number): Promise<boolean> {
+        const conn = await CONN.connect();
+        const sql = "DELETE FROM users WHERE id=($1)";
+        const result = await conn.query(sql, [id]);
+        conn.release();
+
+
+        return true;
     }
 }

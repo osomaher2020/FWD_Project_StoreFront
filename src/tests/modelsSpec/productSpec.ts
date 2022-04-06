@@ -19,7 +19,7 @@ describe("Product Model", () => {
         });
 
         expect(result).toEqual({
-            id: 1,
+            id: 2,
             name: "tomato",
             price: 15.25,
             category: "vegetables"
@@ -28,13 +28,29 @@ describe("Product Model", () => {
 
     // show
     it("show Product:id", async () => {
-        const result: (ProductObj | null) = await product.show(1);
+        const result: (ProductObj | null) = await product.show(2);
 
         expect(result).toEqual({
-            id: 1,
+            id: 2,
             name: "tomato",
             price: 15.25,
             category: "vegetables"
         });
+    });
+
+    // category's products
+    it("list a category products returns ProductObj[]", async () => {
+        const result: ProductObj[] = await product.category_products("vegetables");
+
+        expect(result).toEqual(
+            [
+                {
+                    id: 2,
+                    name: "tomato",
+                    price: 15.25,
+                    category: "vegetables"
+                }
+            ]
+        );
     });
 });

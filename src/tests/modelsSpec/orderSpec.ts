@@ -1,9 +1,28 @@
 import {Order, OrderObj, OrderProductObj} from "../../models/order.model";
+import {User} from "../../models/user.model";
+import {Product} from "../../models/product.model";
 
 
 describe("Order Model", () => {
 
     const order = new Order();
+    const user = new User();
+    const product = new Product();
+
+    beforeAll(async function(){
+
+        await user.create({
+            first_name: "osama",
+            last_name: "maher",
+            password: "123456"
+        });
+
+        await product.create({
+            name: "magic wand",
+            price: 22.5,
+            category: "magical"
+        });
+    });
 
     // create
     it("create new Order", async () => {
@@ -47,5 +66,11 @@ describe("Order Model", () => {
         });
 
         expect(result).toEqual("Error: order is complete - can't add new product");
+    });
+
+    // tearDown
+    afterAll(function(){
+        product.delete(1);
+        user.delete(1);
     });
 });
