@@ -46,7 +46,6 @@ export class Order {
     }
 
     // add new product to an order
-    // endPoint > app.post('/orders/:id/products', addProduct)
     async addProductToOrder(orderProduct: OrderProductObj): Promise<OrderProductObj | string> {
         try {
             const conn = await CONN.connect();
