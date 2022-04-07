@@ -5,6 +5,8 @@ describe("Product Model", () => {
 
     const product = new Product();
 
+    let newProductId: number;
+
     // index
     it("Product: index is defined", () => {
         expect(product.index()).toBeDefined();
@@ -12,14 +14,16 @@ describe("Product Model", () => {
 
     // create
     it("create Product", async () => {
-        const result: ProductObj = await product.create({
+        const newproduct: ProductObj = await product.create({
             name: "tomato",
             price: 15.25,
             category: "vegetables"
         });
 
-        expect(result).toEqual({
-            id: 2,
+        newProductId = newproduct.id as number;
+
+        expect(newproduct).toEqual({
+            id: newProductId,
             name: "tomato",
             price: 15.25,
             category: "vegetables"
@@ -28,10 +32,10 @@ describe("Product Model", () => {
 
     // show
     it("show Product:id", async () => {
-        const result: (ProductObj | null) = await product.show(2);
+        const result: (ProductObj | null) = await product.show(newProductId);
 
         expect(result).toEqual({
-            id: 2,
+            id: newProductId,
             name: "tomato",
             price: 15.25,
             category: "vegetables"
@@ -45,12 +49,18 @@ describe("Product Model", () => {
         expect(result).toEqual(
             [
                 {
-                    id: 2,
+                    id: newProductId,
                     name: "tomato",
                     price: 15.25,
                     category: "vegetables"
                 }
             ]
         );
+    });
+
+
+    // tearDown
+    afterAll(async () => {
+        await product.deleteAll();
     });
 });

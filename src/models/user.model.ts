@@ -73,7 +73,16 @@ export class User {
     async delete(id: number): Promise<boolean> {
         const conn = await CONN.connect();
         const sql = "DELETE FROM users WHERE id=($1)";
-        const result = await conn.query(sql, [id]);
+        await conn.query(sql, [id]);
+        conn.release();
+
+
+        return true;
+    }
+    async deleteAll(): Promise<boolean> {
+        const conn = await CONN.connect();
+        const sql = "DELETE FROM users";
+        await conn.query(sql);
         conn.release();
 
 

@@ -51,7 +51,7 @@ export class ProductsController {
                 res.status(200).json(result);
             }
             else{
-                res.status(401).json("not found");
+                res.status(404).json("not found");
             }
         }
         catch (error) {
@@ -71,7 +71,7 @@ export class ProductsController {
                 res.status(200).json(result);
             }
             else{
-                res.status(401).json("category not found");
+                res.status(404).json("category not found");
             }
         }
         catch (error) {
@@ -89,7 +89,7 @@ export class ProductsController {
                 res.status(200).json(topFive);
             }
             else{
-                res.status(401).json("no sales performed yet !");
+                res.status(404).json("no sales performed yet !");
             }
         }
         catch (error) {

@@ -55,7 +55,11 @@ export class UsersController {
             if(newUser){
                 const jwt_token = jwt.sign({user: newUser}, process.env.JWT_SECRET as string);
 
-                res.status(200).json(jwt_token);
+                res.status(200).json({
+                    first_name: newUser.first_name,
+                    last_name: newUser.last_name,
+                    token: jwt_token
+                });
             }
             else{
                 res.status(400).json("can not create new user");
@@ -79,10 +83,14 @@ export class UsersController {
             if(userAuth){
                 const jwt_token = jwt.sign({user: userAuth}, process.env.JWT_SECRET as string);
 
-                res.status(200).json(jwt_token);
+                res.status(200).json({
+                    first_name: userAuth.first_name,
+                    last_name: userAuth.last_name,
+                    token: jwt_token
+                });
             }
             else{
-                res.status(400).json("can not create new user");
+                res.sendStatus(401);
             }
         }
         catch (error) {

@@ -57,4 +57,12 @@ export class Product {
 
         return true;
     }
+    async deleteAll(): Promise<boolean> {
+        const conn = await CONN.connect();
+        const sql = "DELETE FROM products";
+        await conn.query(sql);
+        conn.release();
+
+        return true;
+    }
 }

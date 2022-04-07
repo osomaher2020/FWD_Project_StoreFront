@@ -1,7 +1,7 @@
 import express from "express";
 import CONN from '../DB_CONN';
 
-const verifyOrderIsActive = async (req: express.Request, _res: express.Response, next: express.NextFunction) => {
+const verifyOrderIsActive = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
         const conn = await CONN.connect();
         const sql = "SELECT * FROM orders WHERE id=($1)";
@@ -10,14 +10,19 @@ const verifyOrderIsActive = async (req: express.Request, _res: express.Response,
 
         const order = result.rows[0];
 
-        if(order.status === "complete"){
-            throw new Error(`order is ${order.status} - can't add new product`);
+        if(order){
+            if(order.status == "complete"){
+                throw new Error(`order is ${order.status} - can't add new product`);
+            }
+        }
+        else{
+            throw new Error(`can't find order with id: ${req.params.id}`);
         }
 
         next();
     }
     catch (error) {
-        return `${error}`;
+        res.status(400).send(`${error}`);
     }
 }
 

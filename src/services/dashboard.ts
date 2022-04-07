@@ -25,10 +25,10 @@ export class Dashboard {
     // ------------------------------ Orders --------------------------------
 
     // Current Order products by a user
-    async currUserOrderProducts(userId: number, orderId: number): Promise<{id:number, name: string, quantity: number}[]> {
+    async currUserOrderProducts(userId: number, orderId: number): Promise<{name: string, price:number, quantity: number}[]> {
         const conn = await CONN.connect();
         const sql = "SELECT "+
-                        "products.id AS id, products.name AS name, order_products.quantity AS quantity "+
+                        "products.name AS name, products.price AS price, order_products.quantity AS quantity "+
                     "FROM products "+
                     "INNER JOIN order_products ON products.id = order_products.product_id "+
                     "INNER JOIN orders ON orders.id = order_products.order_id "+

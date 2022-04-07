@@ -9,68 +9,65 @@ describe("Order Model", () => {
     const user = new User();
     const product = new Product();
 
+    let newUserId: number;
+    let newProductId: number;
+    let newOrderId: number;
+
+    // setup -> user & product
     beforeAll(async function(){
 
-        await user.create({
+        const newUser = await user.create({
             first_name: "osama",
             last_name: "maher",
             password: "123456"
         });
 
-        await product.create({
+        newUserId = newUser.id as number;
+
+        const newProd = await product.create({
             name: "magic wand",
             price: 22.5,
             category: "magical"
         });
+
+        newProductId = newProd.id as number;
     });
 
     // create
     it("create new Order", async () => {
-        const result: (OrderObj | string) = await order.create({
-            user_id: 1,
+        const newOrder: OrderObj = await order.create({
+            user_id: newUserId,
             status: "active"
         });
 
-        expect(result).toEqual({
-            id: 1,
-            user_id: '1',
+        newOrderId = newOrder.id as number;
+
+        expect(newOrder).toEqual({
+            id: newOrderId,
+            user_id: newUserId,
             status: "active"
         });
     });
 
     // add a product to the current order
     it("add product to an Order", async () => {
-        const result: (OrderProductObj | string) = await order.addProductToOrder({
-            order_id: 1,
-            product_id: 1,
+        const newOrderProd: OrderProductObj = await order.addProductToOrder({
+            order_id: newOrderId,
+            product_id: newProductId,
             quantity: 20
         });
 
-        expect(result).toEqual({
-            id: 1,
-            order_id: '1',
-            product_id: '1',
+        expect(newOrderProd).toEqual({
+            id: newOrderProd.id,
+            order_id: newOrderId,
+            product_id: newProductId,
             quantity: 20
         });
-    });
-
-    // change order status = "complete" & try to add a product
-    it("add product to completed order returns Error", async () => {
-
-        await order.updateOrderStatus(1, "complete");
-
-        const result: (OrderProductObj | string) = await order.addProductToOrder({
-            order_id: 1,
-            product_id: 1,
-            quantity: 55
-        });
-
-        expect(result).toEqual("Error: order is complete - can't add new product");
     });
 
     // tearDown
-    afterAll(function(){
-        product.delete(1);
-        user.delete(1);
+    afterAll(async () => {
+        await product.deleteAll();
+        await user.deleteAll();
     });
 });
