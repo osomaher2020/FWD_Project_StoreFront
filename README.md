@@ -20,5 +20,24 @@
   ## Running the project
   1. in the command-line run database migrations:
       - `db-migrate-up`
-  2. run the Express server
+  2. run the Express server (runs on port 3000)
       - `npm run watch`
+      * the server will run on http://localhost:3000
+  ---
+  ### API endPoints:
+  #### 2. Main Entry Point
+  * **(GET)** `http://localhost:3000/`
+  #### 1. Users
+  * creating new user: **(POST)** `http://localhost:3000/users`
+  * Authenticate (SignIn): **(POST)** `http://localhost:3000/users/authenticate`
+  * List (index) all users: **(GET)** `http://localhost:3000/users`
+    - *requires Authorization Token*
+  * Show specific user: **(GET)** `http://localhost:3000/users/:id`
+    - *requires Authorization Token*
+  #### 2. Products
+  * creating new product: **(POST)** `http://localhost:3000/products`
+    - *requires Authorization Token*
+  * List (index) all products: **(GET)** `http://localhost:3000/products`
+  * Show specific product: **(GET)** `http://localhost:3000/products/:id`
+  * List products which have a specified Category: **(GET)** `http://localhost:3000/products/category/:category_name`
+  * Top 5 products: **(GET)** `http://localhost:3000/topFive/products`
