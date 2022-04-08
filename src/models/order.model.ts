@@ -15,6 +15,16 @@ export type OrderProductObj = {
 
 export class Order {
 
+    // list orders
+    async index(): Promise<OrderObj[]> {
+        const conn = await CONN.connect();
+        const sql = "SELECT * FROM orders";
+        const result = await conn.query(sql);
+        conn.release();
+
+        return result.rows;
+    }
+
     // create new order (cart)
     async create(order: OrderObj): Promise<OrderObj> {
         const conn = await CONN.connect();

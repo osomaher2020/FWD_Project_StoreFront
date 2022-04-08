@@ -5,6 +5,17 @@ import { Dashboard } from "../services/dashboard";
 
 export class OrdersController {
 
+    async index(_req: express.Request, res: express.Response): Promise<void> {
+        try{
+            const order = new Order();
+            const result = await order.index();
+            res.status(200).json(result);
+        }
+        catch(error){
+            res.status(400).json(error);
+        }
+    }
+
     async create(req: express.Request, res: express.Response): Promise<void> {
         try {
             const order = new Order();
@@ -15,6 +26,23 @@ export class OrdersController {
             }
 
             const result = await order.create(newOrder);
+
+            res.status(200).json(result);
+        }
+        catch (error) {
+            res.status(400).json(error);
+        }
+    }
+
+    // update order status
+    async updateOrderStatus(req: express.Request, res: express.Response): Promise<void> {
+        try {
+            const order = new Order();
+
+            const order_id = parseInt(req.params.id);
+            const status = req.body.status;
+            
+            const result = await order.updateOrderStatus(order_id, status);
 
             res.status(200).json(result);
         }

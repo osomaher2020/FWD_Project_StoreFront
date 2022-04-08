@@ -47,7 +47,7 @@ export class Dashboard {
                     "FROM orders "+
                     "INNER JOIN order_products ON orders.id = order_products.order_id "+
                     "INNER JOIN products ON products.id = order_products.product_id "+
-                        "WHERE orders.user_id=($1) AND status='complete'";
+                        "WHERE orders.user_id=($1) AND orders.status='complete'";
         const result = await conn.query(sql, [userId]);
         conn.release();
 
