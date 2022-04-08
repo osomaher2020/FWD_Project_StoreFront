@@ -9,6 +9,16 @@
       - `CREATE USER osama_maher WITH ENCRYPTED PASSWORD '123';`
       - `GRANT ALL PRIVILEGES ON DATABASE product_store TO osama_maher;`
       - `GRANT ALL PRIVILEGES ON DATABASE product_store_test TO osama_maher;`
-  5. Install "db-migrate & db-migrate-pg" globally using command:
+  4. Install "db-migrate & db-migrate-pg" globally using command:
       - `npm i -g db-migrate`
       - `npm i -g db-migrate-pg`
+---
+  ## Package installation
+  * open the project folder & run command:
+      - `npm install`
+---
+  ## Running the project
+  1. in the command-line run database migrations:
+      - `db-migrate-up`
+  2. run the Express server
+      - `npm run watch`
