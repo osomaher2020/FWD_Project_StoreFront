@@ -69,5 +69,6 @@ describe("Order Model", () => {
     afterAll(async () => {
         await product.deleteAll();
         await user.deleteAll();
+        await order.deleteAll();
     });
 });

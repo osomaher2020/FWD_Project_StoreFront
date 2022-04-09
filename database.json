@@ -1,16 +1,16 @@
 {
     "dev": {
         "driver": "pg",
-        "host": "127.0.0.1",
-        "database": "product_store",
-        "user": "osama_maher",
-        "password": "123"
+        "host": {"ENV": "DB_HOST"},
+        "database": {"ENV": "DB_NAME"},
+        "user": {"ENV": "DB_USER"},
+        "password": {"ENV": "DB_PASSWORD"}
     },
     "test": {
         "driver": "pg",
-        "host": "127.0.0.1",
-        "database": "product_store_test",
-        "user": "osama_maher",
-        "password": "123"
+        "host": {"ENV": "DB_HOST"},
+        "database": {"ENV": "TEST_DB_NAME"},
+        "user": {"ENV": "DB_USER"},
+        "password": {"ENV": "DB_PASSWORD"}
     }
 }

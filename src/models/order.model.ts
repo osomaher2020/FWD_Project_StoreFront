@@ -35,6 +35,16 @@ export class Order {
         return result.rows[0];
     }
 
+    // list all orders by a user
+    async allUserOrders(userId: number): Promise<OrderObj[]> {
+        const conn = await CONN.connect();
+        const sql = "SELECT * from orders WHERE user_id=($1)";
+        const result = await conn.query(sql, [userId]);
+        conn.release();
+
+        return result.rows;
+    }
+
     // update order's status
     async updateOrderStatus(order_id: number, status: string): Promise<OrderObj> {
         const conn = await CONN.connect();

@@ -41,7 +41,7 @@ export class OrdersController {
 
             const order_id = parseInt(req.params.id);
             const status = req.body.status;
-            
+
             const result = await order.updateOrderStatus(order_id, status);
 
             res.status(200).json(result);
@@ -63,6 +63,22 @@ export class OrdersController {
             }
 
             const result = await order.addProductToOrder(newOrderProd);
+
+            res.status(200).json(result);
+        }
+        catch (error) {
+            res.status(400).json(error);
+        }
+    }
+
+    // all orders by a User
+    async allUserOrders(req: express.Request, res: express.Response): Promise<void> {
+        try {
+            const order = new Order();
+
+            const user_id = parseInt(req.params.user_id);
+
+            const result = await order.allUserOrders(user_id);
 
             res.status(200).json(result);
         }

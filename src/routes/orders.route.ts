@@ -10,6 +10,7 @@ const ordersRoutes = (app: express.Application) => {
     app.post("/orders", verifyAuthToken, ordersController.create); // create new order
     app.put("/orders/:id", verifyAuthToken, ordersController.updateOrderStatus); // update Order Status
     app.post('/orders/:id/products', [verifyAuthToken, verifyOrderIsActive], ordersController.addProductToOrder); // ADD product to an order
+    app.get('/users/:user_id/orders', verifyUserAuth, ordersController.allUserOrders); // LIST all user orders
     app.get('/users/:user_id/orders/:order_id/products', verifyUserAuth, ordersController.currUserOrderProducts); // LIST Current Order products made by a user
     app.get('/complete-orders/:user_id', verifyUserAuth, ordersController.userCompletedOrders); // completed orders[] of a user
 }
