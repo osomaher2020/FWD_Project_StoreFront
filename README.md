@@ -23,3 +23,22 @@
   2. run the Express server (runs on port 3000)
       - `npm run watch`
       * the server will run on http://localhost:3000
+---
+  ## .env
+  ```
+  ENV="test"
+
+  HOST="http://localhost"
+  PORT="3000"
+
+  DB_HOST="localhost"
+  DB_NAME="product_store"
+  TEST_DB_NAME="product_store_test"
+  DB_USER="osama_maher"
+  DB_PASSWORD="123"
+
+  BCRYPT_SALT="osomaher"
+  SALT_ROUND="10"
+
+  JWT_SECRET="osomaher1@gmail.com"
+  ```
