@@ -25,20 +25,21 @@
       * the server will run on http://localhost:3000
 ---
   ## .env
-  ```
-  ENV="test"
+    ```
+    ENV="dev"
 
-  HOST="http://localhost"
-  PORT="3000"
+    HOST="http://localhost"
+    PORT="3000"
 
-  DB_HOST="localhost"
-  DB_NAME="product_store"
-  TEST_DB_NAME="product_store_test"
-  DB_USER="osama_maher"
-  DB_PASSWORD="123"
+    DB_HOST="localhost"
+    DB_PORT="5432"
+    DB_NAME="product_store"
+    TEST_DB_NAME="product_store_test"
+    DB_USER="osama_maher"
+    DB_PASSWORD="123"
 
-  BCRYPT_SALT="osomaher"
-  SALT_ROUND="10"
+    BCRYPT_SALT="osomaher"
+    SALT_ROUND="10"
 
-  JWT_SECRET="osomaher1@gmail.com"
-  ```
+    JWT_SECRET="osomaher1@gmail.com"
+    ```
