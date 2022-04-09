@@ -29,3 +29,25 @@
   - *requires Authorization Token*
 * Completed orders of a user: **(GET)** `http://localhost:3000/complete-orders/:user_id`
   - *requires Authorization Token*
+---
+## Database Schema:
+![Database Schema](DB_schema.png)
+### 1. Users
+  * id [SERIAL PRIMARY KEY]
+  * first_name [VARCHAR(100) NOT NULL]
+  * last_name [VARCHAR(50)]
+  * password [VARCHAR(255) NOT NULL]
+### 2. Products
+  * id [SERIAL PRIMARY KEY]
+  * name [VARCHAR(100) NOT NULL]
+  * price [FLOAT(2) NOT NULL]
+  * category [VARCHAR(50) NULL]
+### 3. Orders
+  * id [SERIAL PRIMARY KEY]
+  * user_id [INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE]
+  * status [VARCHAR(30) NOT NULL NOT NULL]
+### 4. Order_products
+  * id [SERIAL PRIMARY KEY]
+  * order_id [INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE]
+  * product_id [INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE]
+  * quantity [INTEGER NOT NULL]
